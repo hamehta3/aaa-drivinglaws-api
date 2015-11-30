@@ -17,6 +17,8 @@ var start =  function(cb) {
   // Configure express 
   app = express();
 
+  app.set('port', (process.env.PORT || config.get('NODE_PORT')));
+
   app.use(morgan('common'));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json({type: '*/*'}));
@@ -36,8 +38,8 @@ var start =  function(cb) {
     next(err);
   });
 
-  app.listen(config.get('NODE_PORT'));
-  logger.info('[SERVER] Listening on port ' + config.get('NODE_PORT'));
+  app.listen(app.get('port'));
+  logger.info('[SERVER] Listening on port ' + app.get('port'));
   
   if (cb) {
     return cb();
