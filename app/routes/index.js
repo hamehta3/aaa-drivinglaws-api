@@ -8,8 +8,13 @@ module.exports = function(app) {
   // Initialize all routes
   Object.keys(routes).forEach(function(routeName) {
     var router = express.Router();
-    // You can add some middleware here 
-    // router.use(someMiddleware);
+    
+    // Enable CORS
+    router.use(function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+    });
     
     // Initialize the route to add its functionality to router
     require('./' + routeName)(router);

@@ -63,7 +63,7 @@ module.exports = function(router) {
   router.route('/')
   .get(function(req, res, next) {
     // GET /states
-    State.aggregate().project({ _id: 0, states: "$state" }).group({ _id: "states", "states": { $addToSet: "$states" } }).project({ _id: 0, states: "$states" }).exec(function(err, states) {
+    State.aggregate().project({ _id: 0, states: "$state" }).sort('states').group({ _id: "states", "states": { $push: "$states" } }).project({ _id: 0, states: "$states" }).exec(function(err, states) {
         if (err) {
           res.send(err);
         }
