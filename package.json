@@ -30,7 +30,7 @@
     "dotenv" : "~1.2.0"
   },
   "engines": {
-    "node": "5.0.0"
+    "node": "6.11.1"
   },
   "license": "MIT"
 }
